@@ -99,8 +99,6 @@ class Grafo:
             else:
                 return (True, ciclo)
 
-    # Não passa o grafo porque não é necessário, já que a lista de arestas conhecidas contém todas as arestas
-    # do grafo
     def __subciclo_euleriano__(self ,vertice: int, arestas_conhecidas: dict) -> (bool, list):
         ciclo = [vertice]
         vertice_inicial = vertice
@@ -109,6 +107,8 @@ class Grafo:
             existe_aresta_nao_visitada = False
             for vizinho in range(self.n_vertices):
                 if vizinho == vertice:
+                    continue
+                if frozenset({vizinho, vertice}) not in arestas_conhecidas.keys():
                     continue
                 if arestas_conhecidas[frozenset({vizinho, vertice})] == False:
                     aresta = frozenset({vizinho, vertice})
