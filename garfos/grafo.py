@@ -4,6 +4,7 @@ class Grafo:
         self.rotulos = []
         self.n_vertices = 0
         self.n_arestas = 0
+        self.funcao_peso = {}
 
         self.ler(caminho_do_arquivo)
 
@@ -81,8 +82,62 @@ class Grafo:
                 if u-1 < len(self.grafo) and v-1 < len(self.grafo):
                     self.grafo[u-1][v-1] = valor
                     self.grafo[v-1][u-1] = valor
+                    aresta = frozenset({u-1,v-1})
+                    self.funcao_peso[aresta] = valor
 
                 self.n_arestas += 1
+
+    def ciclo_euleriano(self) -> (bool, list):
+        arestas_conhecidas = dict().fromkeys(self.funcao_peso.keys(), False)
+        vertice = 1
+        (resultado, ciclo) = self.__subciclo_euleriano__(vertice, arestas_conhecidas)
+        if resultado == False:
+            return (False, None)
+        else:
+            if False in arestas_conhecidas.values():
+                return (False, None)
+            else:
+                return (True, ciclo)
+
+    # Não passa o grafo porque não é necessário, já que a lista de arestas conhecidas contém todas as arestas
+    # do grafo
+    def __subciclo_euleriano__(self ,vertice: int, arestas_conhecidas: dict) -> (bool, list):
+        ciclo = [vertice]
+        vertice_inicial = vertice
+        existe_aresta_nao_visitada = False
+        while True:
+            existe_aresta_nao_visitada = False
+            for vizinho in range(self.n_vertices):
+                if arestas_conhecidas[frozenset({vizinho, vertice})] == False:
+                    aresta = frozenset({vizinho, vertice})
+                    arestas_conhecidas[aresta] = True
+                    vertice = vizinho
+                    ciclo.append(vertice)
+                    existe_aresta_nao_visitada = True
+
+            if not existe_aresta_nao_visitada:
+                return (False, None)
+
+            if vertice == vertice_inicial:
+                break
+
+        vertices_faltantes = []
+        for vertice in ciclo:
+            for aresta, conhecida in arestas_conhecidas.items():
+                if vertice in aresta:
+                    if conhecida == False:
+                        arestas_faltantes.append(aresta)
+
+        for vertice_faltante in vertices_faltantes:
+            (resultado, ciclo_) = self.__subciclo_euleriano__(vertice_faltante, arestas_conhecidas)
+            if resultado == False:
+                return (False, None)
+
+            i = ciclo.index(vertice_faltante)
+            ciclo = ciclo[:i] + ciclo_ + ciclo[i+1:]
+
+        return (True, ciclo)
+
 
 teste = Grafo("w.txt")
 print("qtd", teste.qtdVertices(), teste.qtdArestas())
@@ -91,6 +146,8 @@ print("rotulo", teste.rotulo(1), teste.rotulo(3), teste.rotulo(5))
 print("vizinhos", teste.vizinhos(1), teste.vizinhos(3), teste.vizinhos(5), teste.vizinhos(2))
 print("haaresta", teste.haAresta(1, 3), teste.haAresta(3, 1), teste.haAresta(1, 2), teste.haAresta(2, 1))
 print("peso", teste.peso(1, 3), teste.peso(3, 1), teste.peso(3, 5), teste.peso(1, 2))
+print("lista adjacencias", teste.funcao_peso)
+print(teste.ciclo_euleriano())
 
 #*vertices n
 # 1 rotulo_1
