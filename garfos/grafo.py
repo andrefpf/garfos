@@ -89,7 +89,7 @@ class Grafo:
 
     def ciclo_euleriano(self) -> (bool, list):
         arestas_conhecidas = dict().fromkeys(self.funcao_peso.keys(), False)
-        vertice = 1
+        vertice = 0
         (resultado, ciclo) = self.__subciclo_euleriano__(vertice, arestas_conhecidas)
         if resultado == False:
             return (False, None)
@@ -108,6 +108,8 @@ class Grafo:
         while True:
             existe_aresta_nao_visitada = False
             for vizinho in range(self.n_vertices):
+                if vizinho == vertice:
+                    continue
                 if arestas_conhecidas[frozenset({vizinho, vertice})] == False:
                     aresta = frozenset({vizinho, vertice})
                     arestas_conhecidas[aresta] = True
@@ -136,7 +138,7 @@ class Grafo:
             i = ciclo.index(vertice_faltante)
             ciclo = ciclo[:i] + ciclo_ + ciclo[i+1:]
 
-        return (True, ciclo)
+        return (True, [x+1 for x in ciclo])
 
 
 teste = Grafo("w.txt")
