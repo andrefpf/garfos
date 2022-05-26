@@ -87,17 +87,49 @@ class Grafo:
 
                 self.n_arestas += 1
 
-    def ciclo_euleriano(self) -> (bool, list):
+    def busca_em_largura(self, vertice_inicial: int):
+        conhecido = [False] * self.n_vertices
+        distancia = [float('inf')] * self.n_vertices
+        antecessor = [None] * self.n_vertices
+        conhecido[vertice_inicial] = True
+        distancia[vertice_inicial] = 0
+        fila = []
+        fila.append(vertice_inicial)
+
+        while len(fila) > 0:
+            u = fila.pop(0)
+            vizinhos = self.vizinhos(u+1)
+            index_vizinhos = [self.rotulos.index(vizinho) for vizinho in vizinhos]
+            for v in index_vizinhos:
+                if conhecido[v] == False:
+                    conhecido[v] = True
+                    distancia[v] = distancia[u] + 1
+                    antecessor[v] = u
+                    fila.append(v)
+
+        return (distancia, antecessor)
+
+    def ciclo_euleriano(self) -> str:
+        existe_ciclo = False
+        ciclo = []
         arestas_conhecidas = dict().fromkeys(self.funcao_peso.keys(), False)
         vertice = 0
-        (resultado, ciclo) = self.__subciclo_euleriano__(vertice, arestas_conhecidas)
+
+        (resultado, subciclo) = self.__subciclo_euleriano__(vertice, arestas_conhecidas)
         if resultado == False:
-            return (False, None)
+            existe_ciclo = False
         else:
             if False in arestas_conhecidas.values():
-                return (False, None)
+                existe_ciclo = False
             else:
-                return (True, ciclo)
+                existe_ciclo = True
+                ciclo = subciclo
+
+        if not existe_ciclo:
+                return "0"
+        else:
+            ciclo_string = [str(vertice) for vertice in ciclo]
+            return "1\n" + ",".join(ciclo_string)
 
     def __subciclo_euleriano__(self ,vertice: int, arestas_conhecidas: dict) -> (bool, list):
         ciclo = [vertice]
@@ -150,6 +182,7 @@ print("haaresta", teste.haAresta(1, 3), teste.haAresta(3, 1), teste.haAresta(1, 
 print("peso", teste.peso(1, 3), teste.peso(3, 1), teste.peso(3, 5), teste.peso(1, 2))
 print("lista adjacencias", teste.funcao_peso)
 print(teste.ciclo_euleriano())
+print(teste.busca_em_largura(0))
 
 #*vertices n
 # 1 rotulo_1
