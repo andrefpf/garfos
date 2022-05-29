@@ -87,23 +87,3 @@ class Grafo:
                     self.funcao_peso[aresta] = valor
 
                 self.n_arestas += 1
-
-# teste = Grafo("w.txt")
-# print("qtd", teste.qtdVertices(), teste.qtdArestas())
-# print("grau", teste.grau(5), teste.grau(3), teste.grau(1), teste.grau(2))
-# print("rotulo", teste.rotulo(1), teste.rotulo(3), teste.rotulo(5))
-# print("vizinhos", teste.vizinhos(1), teste.vizinhos(3), teste.vizinhos(5), teste.vizinhos(2))
-# print("haaresta", teste.haAresta(1, 3), teste.haAresta(3, 1), teste.haAresta(1, 2), teste.haAresta(2, 1))
-# print("peso", teste.peso(1, 3), teste.peso(3, 1), teste.peso(3, 5), teste.peso(1, 2))
-# print("lista adjacencias", teste.funcao_peso)
-# print(teste.ciclo_euleriano())
-# print(teste.busca_em_largura(0))
-
-#*vertices n
-# 1 rotulo_1
-# 2 rotulo_2
-# 3 rotulo_3
-#*edges
-# a b valor_peso
-# a c valor_peso
-# 
