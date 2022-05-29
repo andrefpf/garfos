@@ -24,6 +24,7 @@ if __name__ == '__main__':
     except IndexError:
         print('Entrada incorreta. Tente escrever:')
         print('>> python3 questao2.py <arquivo grafo> <vertice>')
+        exit()
 
     grafo = Grafo(arquivo)
     (distancia, antecessor) = busca_em_largura(grafo, vertice)
