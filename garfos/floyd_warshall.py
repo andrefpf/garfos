@@ -1,6 +1,8 @@
+from math import inf
+
 def calc_floyd_warshall(grafo):
     size = grafo.qtdVertices()
-    D = [[float('inf') for _ in range(size)] for _ in range(size)]
+    D = [[inf for _ in range(size)] for _ in range(size)]
 
     for u in range(size):
         for v in range(size):

@@ -1,3 +1,5 @@
+from math import inf
+
 class Grafo:
     def __init__(self, caminho_do_arquivo):
         self.grafo = []
@@ -36,7 +38,7 @@ class Grafo:
 
         if v-1 < len(self.grafo):
             for n, value in enumerate(self.grafo[v-1]):
-                if value != float('inf'):
+                if value != inf:
                     lista_vizinhos.append(n+1)
                     # lista_vizinhos.append(self.rotulo(n+1))
 
@@ -44,7 +46,7 @@ class Grafo:
 
     def haAresta(self, u, v):
         if u-1 < len(self.grafo) and v-1 < len(self.grafo):
-            return self.grafo[u-1][v-1] != float('inf')
+            return self.grafo[u-1][v-1] != inf
         
         return False
 
@@ -52,7 +54,7 @@ class Grafo:
         if u-1 < len(self.grafo) and v-1 < len(self.grafo):
             return self.grafo[u-1][v-1]
         
-        return float('inf')
+        return inf
 
     def ler(self, caminho_do_arquivo):
         arquivo = open(caminho_do_arquivo)
@@ -71,12 +73,12 @@ class Grafo:
                 continue
 
             if flag:
-                vertice, rotulo = linha.split(" ")
+                vertice, rotulo = linha.split(" ", 1)
                 vertice = int(vertice)
 
                 self.rotulos.append(rotulo)
 
-                self.grafo[vertice-1] = self.n_vertices*[float('inf')]
+                self.grafo[vertice-1] = self.n_vertices*[inf]
             else:
                 u, v, valor = [int(i) for i in linha.split(" ")]
 
