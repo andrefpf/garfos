@@ -13,7 +13,6 @@ def busca_em_largura(grafo, vertice_inicial: int):
     while len(fila) > 0:
         u = fila.pop(0)
         vizinhos = [x-1 for x in grafo.vizinhos(u+1)]
-        #index_vizinhos = [grafo.vizinhos(vizinho) for vizinho in vizinhos]
         for v in vizinhos:
             if conhecido[v] == False:
                 conhecido[v] = True

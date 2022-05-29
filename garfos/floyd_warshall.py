@@ -1,6 +1,6 @@
 from math import inf
 
-def calc_floyd_warshall(grafo):
+def floyd_warshall(grafo):
     size = grafo.qtdVertices()
     distancias = [[inf for _ in range(size)] for _ in range(size)]
 
