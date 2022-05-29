@@ -20,5 +20,5 @@ def calc_floyd_warshall(grafo):
 def floyd_warshall(grafo):
     min_path = calc_floyd_warshall(grafo)
     for i in range(len(min_path)):
-        paths = ' '.join([str(x) for x in min_path[i]])
-        print("{}: {}".format(i+1, paths))
+        paths = ','.join([str(x) for x in min_path[i]])
+        print("{}:{}".format(i+1, paths))
