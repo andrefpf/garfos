@@ -15,6 +15,8 @@ if __name__ == '__main__':
     except IndexError:
         print('Entrada incorreta. Tente escrever:')
         print('>> python3 questao3.py <arquivo grafo>')
+        exit()
+        
     grafo = Grafo(arquivo)
     (resultado, ciclo) = calc_hierholzer(grafo)
     print(format_output(resultado, ciclo))

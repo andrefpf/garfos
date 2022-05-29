@@ -36,3 +36,4 @@ if __name__ == '__main__':
     except IndexError:
         print('Entrada incorreta. Tente escrever:')
         print('>> python3 questao5.py <arquivo grafo> <vertice>')
+        exit()
