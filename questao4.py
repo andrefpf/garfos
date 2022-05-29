@@ -24,7 +24,7 @@ def caminho_para_nos(arquivo, vertice):
         caminho = list(reversed(caminho))
         distancia = d[v-1]
 
-        out = format_output(vertice, caminho, distancia)
+        out = format_output(v, caminho, distancia)
         print(out)
 
 
