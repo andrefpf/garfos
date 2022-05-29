@@ -40,6 +40,9 @@ def dijkstra(grafo, origem):
         u = distancias.pop_min()
 
         for v in vizinhos(u):
+            if v not in distancias.indexes:
+                continue
+
             if distancias[v] > distancias[u] + peso(u, v):
                 distancias[v] = distancias[u] + peso(u, v)
                 caminhos[v] = u
