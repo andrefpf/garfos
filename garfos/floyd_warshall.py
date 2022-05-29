@@ -4,7 +4,10 @@ def calc_floyd_warshall(grafo):
 
     for u in range(size):
         for v in range(size):
-            D[u][v] = grafo.peso(u+1, v+1)
+            if u == v:
+                D[u][v] = 0
+            else:
+                D[u][v] = grafo.peso(u+1, v+1)
 
     for k in range(size):
         D_prev = D.copy()

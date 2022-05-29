@@ -77,7 +77,6 @@ class Grafo:
                 self.rotulos.append(rotulo)
 
                 self.grafo[vertice-1] = self.n_vertices*[float('inf')]
-                self.grafo[vertice-1][vertice-1] = 0
             else:
                 u, v, valor = [int(i) for i in linha.split(" ")]
 
@@ -175,7 +174,8 @@ class Grafo:
         return (True, [x+1 for x in ciclo])
 
 
-# teste = Grafo("w.txt")
+teste = Grafo("w.txt")
+floyd_warshall(teste)
 # print("qtd", teste.qtdVertices(), teste.qtdArestas())
 # print("grau", teste.grau(5), teste.grau(3), teste.grau(1), teste.grau(2))
 # print("rotulo", teste.rotulo(1), teste.rotulo(3), teste.rotulo(5))
