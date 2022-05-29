@@ -1,6 +1,6 @@
 import sys
-from garfos.grafo import Grafo
-from garfos.ciclo_euleriano import calc_hierholzer
+from grafos.grafo import Grafo
+from grafos.ciclo_euleriano import calc_hierholzer
 
 def format_output(existe_ciclo: bool, ciclo: list):
     if not existe_ciclo:

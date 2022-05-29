@@ -44,7 +44,7 @@ def __subciclo_euleriano__(grafo, vertice: int, arestas_conhecidas: dict):
                     vertices_faltantes.append(aresta)
 
     for vertice_faltante in vertices_faltantes:
-        (resultado, ciclo_) = grafo.__subciclo_euleriano__(vertice_faltante, arestas_conhecidas)
+        (resultado, ciclo_) = __subciclo_euleriano__(grafo, vertice_faltante, arestas_conhecidas)
         if resultado == False:
             return (False, None)
 

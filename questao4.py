@@ -1,6 +1,6 @@
 import sys
-from garfos.grafo import Grafo
-from garfos.caminho_minimo import dijkstra
+from grafos.grafo import Grafo
+from grafos.caminho_minimo import dijkstra
 
 
 def format_output(vertice, caminho, distancia):

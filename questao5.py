@@ -1,6 +1,6 @@
 import sys
-from garfos.grafo import Grafo
-from garfos.floyd_warshall import floyd_warshall
+from grafos.grafo import Grafo
+from grafos.floyd_warshall import floyd_warshall
 
 def format_output(distancias):
     for i in range(len(distancias)):

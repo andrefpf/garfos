@@ -1,6 +1,6 @@
 import sys
-from garfos.grafo import Grafo
-from garfos.busca_em_largura import busca_em_largura
+from grafos.grafo import Grafo
+from grafos.busca_em_largura import busca_em_largura
 
 def extrair_niveis(distancias: list):
     distancias = [x for x in distancias if type(x) == int]
