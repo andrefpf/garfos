@@ -174,8 +174,7 @@ class Grafo:
         return (True, [x+1 for x in ciclo])
 
 
-teste = Grafo("w.txt")
-floyd_warshall(teste)
+# teste = Grafo("w.txt")
 # print("qtd", teste.qtdVertices(), teste.qtdArestas())
 # print("grau", teste.grau(5), teste.grau(3), teste.grau(1), teste.grau(2))
 # print("rotulo", teste.rotulo(1), teste.rotulo(3), teste.rotulo(5))
