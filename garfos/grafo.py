@@ -77,6 +77,7 @@ class Grafo:
                 self.rotulos.append(rotulo)
 
                 self.grafo[vertice-1] = self.n_vertices*[float('inf')]
+                self.grafo[vertice-1][vertice-1] = 0
             else:
                 u, v, valor = [int(i) for i in linha.split(" ")]
 
