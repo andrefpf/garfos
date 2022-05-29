@@ -1,38 +1,29 @@
 import sys
 from garfos.grafo import Grafo
-from garfos.caminho_minimo import dijkstra
+from garfos.floyd_warshall import floyd_warshall
 
+def format_output(distancias):
+    for i in range(len(distancias)):
+        paths = ','.join([str(x) for x in distancias[i]])
+        print("{}:{}".format(i+1, paths))
 
-def format_output(vertice, caminho, distancia):
-    str_caminho = ''.join(f'{i},' for i in caminho[:-1])
-    str_caminho += f'{caminho[-1]};'
-    return f'{vertice}: {str_caminho} d={distancia}'
+        # Caso seja necessario um espacamento entre os dois pontos
+        # e as distâncias
+        #print("{}: {}".format(i+1, paths))
 
-def caminho_para_nos(arquivo, vertice):
-    g = Grafo(arquivo)
-    d, a = dijkstra(g, vertice)
+def calc_floyd_warshall(arquivo):
+    grafo = Grafo(arquivo)
 
-    for v in range(g.qtdVertices()):
-        v += 1
+    distancias = floyd_warshall(grafo)
+    format_output(distancias)
 
-        caminho = []
-        i = v
-        while i is not None:
-            caminho.append(i)
-            i = a[i-1]
-
-        caminho = list(reversed(caminho))
-        distancia = d[v-1]
-
-        out = format_output(vertice, caminho, distancia)
-        print(out)
-
-
-if __name__ == '__main__':   
+if __name__ == '__main__':
     try:
         arquivo = sys.argv[1]
-        vertice = int(sys.argv[2])        
-        caminho_para_nos(arquivo, vertice)
-    except IndexError:
+        calc_floyd_warshall(arquivo)
+    except FileNotFoundError:
+        print('Arquivo inexistente. Tente escrever:')
+        print('>> python3 questao5.py <arquivo grafo>')
+    except:
         print('Entrada incorreta. Tente escrever:')
-        print('>> python3 questao5.py <arquivo grafo> <vertice>')
+        print('>> python3 questao5.py <arquivo grafo>')
