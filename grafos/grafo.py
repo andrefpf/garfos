@@ -92,9 +92,12 @@ class Grafo:
 
                 if u-1 < len(self.grafo) and v-1 < len(self.grafo):
                     self.grafo[u-1][v-1] = valor
-                    if (!self.directed):
+                    if (self.directed):
+                        aresta = (u-1, v-1)
+                        self.funcao_peso[aresta] = valor
+                    else:
                         self.grafo[v-1][u-1] = valor
                         aresta = frozenset({u-1,v-1})
                         self.funcao_peso[aresta] = valor
-
+                        
                 self.n_arestas += 1
