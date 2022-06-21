@@ -7,6 +7,7 @@ class Grafo:
         self.n_vertices = 0
         self.n_arestas = 0
         self.funcao_peso = {}
+        self.directed = False
 
         self.ler(caminho_do_arquivo)
 
@@ -72,20 +73,28 @@ class Grafo:
                 flag = False
                 continue
 
+            if "*arcs" in linha:
+                flag = False
+                self.directed = True
+                continue
+
             if flag:
                 vertice, rotulo = linha.split(" ", 1)
-                vertice = int(vertice)
+                vertice = float(vertice)
 
                 self.rotulos.append(rotulo)
 
                 self.grafo[vertice-1] = self.n_vertices*[inf]
             else:
-                u, v, valor = [int(i) for i in linha.split(" ")]
+                u, v, valor = [float(i) for i in linha.split(" ")]
+                u, v = int(u), int(v) #deixar isso por enquanto pra garantir que não
+                                      #seja passado indice zoado, arrumo depois
 
                 if u-1 < len(self.grafo) and v-1 < len(self.grafo):
                     self.grafo[u-1][v-1] = valor
-                    self.grafo[v-1][u-1] = valor
-                    aresta = frozenset({u-1,v-1})
-                    self.funcao_peso[aresta] = valor
+                    if (!self.directed):
+                        self.grafo[v-1][u-1] = valor
+                        aresta = frozenset({u-1,v-1})
+                        self.funcao_peso[aresta] = valor
 
                 self.n_arestas += 1
