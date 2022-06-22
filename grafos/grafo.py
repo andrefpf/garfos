@@ -45,6 +45,16 @@ class Grafo:
 
         return lista_vizinhos
 
+    def vizinhos_saintes(self, v):
+        lista_vizinhos = []
+        vertice = v - 1
+        if self.directed == False:
+            return self.vizinhos(v)
+        for aresta in self.funcao_peso.keys():
+            if aresta[0] == vertice:
+                lista_vizinhos.append(aresta[1]+1)
+        return lista_vizinhos
+
     def haAresta(self, u, v):
         if u-1 < len(self.grafo) and v-1 < len(self.grafo):
             return self.grafo[u-1][v-1] != inf
@@ -84,7 +94,7 @@ class Grafo:
 
                 self.rotulos.append(rotulo)
 
-                self.grafo[vertice-1] = self.n_vertices*[inf]
+                self.grafo[int(vertice)-1] = self.n_vertices*[inf]
             else:
                 u, v, valor = [float(i) for i in linha.split(" ")]
                 u, v = int(u), int(v) #deixar isso por enquanto pra garantir que não
