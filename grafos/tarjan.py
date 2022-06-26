@@ -57,5 +57,5 @@ def format_output(scc, grafo):
         if scc.count(id) > 1:
             vertices_scc = [i for i in range(0, len(scc)) if scc[i] == id]
             print(",".join([str(v+1) for v in vertices_scc]))
-        elif id+1 in grafo.vizinhos_saintes(id+1):
+        elif (scc.index(id)+1) in grafo.vizinhos_saintes((scc.index(id)+1)):
             print(id+1)
