@@ -23,7 +23,6 @@ class Grafo:
             for value in self.grafo[v-1]:
                 if value != inf:
                     degree += 1
-        
         return degree
 
     def rotulo(self, v):
@@ -58,15 +57,22 @@ class Grafo:
     def haAresta(self, u, v):
         if u-1 < len(self.grafo) and v-1 < len(self.grafo):
             return self.grafo[u-1][v-1] != inf
-        
         return False
 
     def peso(self, u, v):
         if u-1 < len(self.grafo) and v-1 < len(self.grafo):
             return self.grafo[u-1][v-1]
-        
         return inf
 
+    def arestas(self):
+        arestas_validas = []
+        for u in range(self.qtdVertices()):
+            for v in range(self.qtdVertices()):
+                if self.haAresta(u+1, v+1):
+                    aresta = (u+1, v+1, self.peso(u+1, v+1))
+                    arestas_validas.append(aresta)
+        return arestas_validas
+        
     def ler(self, caminho_do_arquivo):
         arquivo = open(caminho_do_arquivo)
         linhas = arquivo.read().splitlines()
@@ -96,7 +102,7 @@ class Grafo:
 
                 self.grafo[int(vertice)-1] = self.n_vertices*[inf]
             else:
-                u, v, valor = [float(i) for i in linha.split(" ")]
+                u, v, valor = [float(i) for i in linha.split()]
                 u, v = int(u), int(v) #deixar isso por enquanto pra garantir que não
                                       #seja passado indice zoado, arrumo depois
 
