@@ -46,6 +46,7 @@ def tarjan_dfs(at, grafo):
     if(ids[at] == low[at]):
         for _ in range(len(stack)):
             node = stack.pop()
+            onStack[node] = False
             low[node] = ids[at]
             if (node == at):
                 break
@@ -55,15 +56,6 @@ def format_output(scc, grafo):
     for id in ids:
         if scc.count(id) > 1:
             vertices_scc = [i for i in range(0, len(scc)) if scc[i] == id]
-            verify = True
-
-            for v in vertices_scc:
-                vizinhos = [x-1 for x in grafo.vizinhos_saintes(v+1)]
-                if len(set(vizinhos).intersection(vertices_scc)) == 0:
-                    verify = False
-                    break
-
-            if verify:
-                print(",".join([str(v+1) for v in vertices_scc]))
+            print(",".join([str(v+1) for v in vertices_scc]))
         elif id+1 in grafo.vizinhos_saintes(id+1):
             print(id+1)
