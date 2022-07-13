@@ -14,7 +14,7 @@ if __name__ == '__main__':
         arquivo = sys.argv[1]
     except IndexError:
         print('Entrada incorreta. Tente escrever:')
-        print('>> python3 questao3.py <arquivo grafo>')
+        print('>> python3 questao2.py <arquivo grafo>')
         exit()
         
     grafo = Grafo(arquivo)
