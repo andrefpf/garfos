@@ -53,12 +53,12 @@ def list_all_maximal_independent_sets(graph: Type[Grafo]) -> list[set]:
     graph_powerset.reverse()
 
     index = 0
-    limit = len(graph_powerset)
-    subsets = graph_powerset
+    index_limit = len(graph_powerset)
+    all_subsets = graph_powerset
     while True:
-        if index == limit:
+        if index == index_limit:
             break
-        subset = subsets[index]
+        subset = all_subsets[index]
         if subset in graph_powerset:
             is_maximal_independent = True
             for vertex_v in subset:

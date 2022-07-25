@@ -5,7 +5,7 @@ from grafos.coloracao_minima import calc_lawlers_algorithm
 def format_output(color_groups: list[set]) -> str:
     result = f"Coloração mínima: {len(color_groups)} cores"
     for color_index in range(len(color_groups)):
-        result += f"\nVértices com número cromático {color_index + 1} - {set([vertex + 1 for vertex in color_groups[color_index]])}"
+        result += f"\nVértices com número cromático {color_index + 1}: {set([vertex + 1 for vertex in color_groups[color_index]])}"
     return result
 
 if __name__ == "__main__":
