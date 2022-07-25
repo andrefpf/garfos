@@ -24,7 +24,7 @@ def hopcroft_karp(grafo, div):
             if pair_u[i] == 0 and dfs(i):
                 matching += 1
 
-    return (matching, pair_u[1:])
+    return (matching, pair_u)
 
 def bfs():
     global g, u, v 
