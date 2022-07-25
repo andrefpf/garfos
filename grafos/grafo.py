@@ -1,15 +1,24 @@
 from math import inf
 
 class Grafo:
-    def __init__(self, caminho_do_arquivo):
+    def __init__(self, caminho_do_arquivo="", ler_arquivo=True, vertices=set(), edges={}):
         self.grafo = []
         self.rotulos = []
         self.n_vertices = 0
         self.n_arestas = 0
         self.funcao_peso = {}
         self.directed = False
+        self.lista_vertices = set()
+        if ler_arquivo:
+            self.ler(caminho_do_arquivo)
+        else:
+            self.n_vertices = len(vertices)
+            self.n_arestas = len(edges)
+            self.lista_vertices = vertices
+            self.funcao_peso = edges
 
-        self.ler(caminho_do_arquivo)
+    def getVertices(self):
+        return self.lista_vertices
 
     def qtdVertices(self):
         return self.n_vertices
@@ -97,7 +106,7 @@ class Grafo:
             if flag:
                 vertice, rotulo = linha.split(" ", 1)
                 vertice = float(vertice)
-
+                self.lista_vertices.add(len(self.lista_vertices))
                 self.rotulos.append(rotulo)
 
                 self.grafo[int(vertice)-1] = self.n_vertices*[inf]
